@@ -1,0 +1,12 @@
+{
+    "name": "dlang.org",
+    "targetType": "executable",
+    "description": "The D Programming Language official website",
+    "copyright": "Copyright © 1999-2015, Digital Mars",
+    "authors": ["Walter Bright", "Andrei Alexandrescu", "See Github for more."],
+    "dependencies": {
+	"vibe-d": "~>0.7.22",
+	"libddoc": { "path": "../libddoc/" }
+    },
+    "versions": [ "VibeDefaultMain" ]
+}

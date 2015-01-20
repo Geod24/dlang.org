@@ -1,0 +1,48 @@
+#navblock
+  h2.tocheader a(href="index.html", title="Programming Language").active D 2.066.1
+  ul
+    li
+      span.tocentryth a(href="download.html" title="Downloads") Download
+    li
+      span.tocentryth a(href="overview.html" title="Language overview") Overview
+    li
+      span.tocentryth a(href="comparison.html" title="Feature list") Features
+    li
+      span.tocentryt a(href="changelog.html" title="History of changes to D")Change Log
+    li
+      span.tocentryt a(href="bugstats.php" title="D issue and bug tracking system") Bug Tracker
+    li
+      span.tocentryth a(href="faq.html" title="Frequently Asked Questions") FAQ
+    li
+      span.tocentryh a(href="appendices.html") Appendices
+    li
+      span.tocentryt a(href="acknowledgements.html" title="Thank-you to these people who have helped with D") Acknowledgments
+    li
+      span.tocentryt a(href="sitemap.html" title="Documents on this site, indexed alphabetically") Sitemap
+    li
+      span.tocentryt a(href="http://digitalmars.com/d/1.0/index.html" title="D Programming Language 1.0") D1 Home
+
+/*
+
+<div class="navblock"><h2 class="tocheader">Documentation</h2> <ul>    <li><span class="tocentry"><a href="http://ddili.org/ders/d.en/index.html">Online Book (free)
+    <li>span.tocentryt a(href="http://wiki.dlang.org/Books" title="D Programming Language Books">More Books</a></span></li>
+
+    <li><span class="tocentryh"><a href="language-reference.html">Language Reference</a></span></li>
+    <li><span class="tocentry"><a href="phobos/index.html">Library Reference</a></span></li>
+<li><span class="tocentry"><a href="library/index.html">&nbsp;<font size="-1"><span style="visibility: hidden">3</span>Preview new Layout</font></a></span></li>
+
+    <li>span.tocentryth a(href="howtos.html" title="Helps for using D">How-tos</a></span></li>
+    <li><span class="tocentryh"><a href="articles.html">Articles</a></span></li>
+</ul></div>
+<div class="navblock"><h2 class="tocheader"><a href="http://rainers.github.io/visuald/visuald/StartPage.html">Visual D</a></h2> <ul></ul></div>
+<div class="navblock"><h2 class="tocheader">Community</h2> <ul>    <li>span.tocentryt a(href="http://forum.dlang.org/" title="User forums">Forums</a></span></li>
+    <li>span.tocentryt a(href="http://github.com/D-Programming-Language" title="D on github">GitHub</a></span></li>
+    <li>span.tocentryt a(href="http://wiki.dlang.org" title="Wiki for the D Programming Language">Wiki</a></span></li>
+    <li>span.tocentryt a(href="http://wiki.dlang.org/Review_Queue" title="Queue of current and upcoming standard library additions">Review Queue</a></span></li>
+    <li>span.tocentryt a(href="http://code.dlang.org" title="Third party packages written in D">Third Party Packages</a></span></li>
+    <li>span.tocentryt a(href="http://twitter.com/#search?q=%23d_lang" title="#d_lang on twitter.com">Twitter</a></span></li>
+    <li>span.tocentryt a(href="http://digitalmars.com/d/dlinks.html" title="External D related links">Links</a></span></li>
+</ul></div>
+</div>
+
+*/
