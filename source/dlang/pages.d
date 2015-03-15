@@ -27,26 +27,28 @@ private:
 void initialize() {
 	auto router = new URLRouter;
 	debug router.any("*", &debugHandler);
-	router.get("*", &serveCache);
+	router.get("*", &cacheHandler);
 	router.get("/favicon.ico", serveStaticFile("./favicon.ico"));
 	
 	logInfo("Initializing website");
 	initializeWebsite(s_cache, router);
 	logInfo("Cache contains %d elements", s_cache.length);
 
-	logInfo("Initializing druntime");
-	initializeDruntime(s_cache, router);
+	//logInfo("Initializing druntime");
+	//initializeDruntime(s_cache, router);
 
 	/* HTTP Settings & routes creation */
 	auto settings = new HTTPServerSettings;
 	settings.port = 8000;
 	settings.bindAddresses = [ "0.0.0.0" ];
 
-	router.get("/css/cssmenu.css", &serveDdocCss);
+	router.get("/css/cssmenu.css", &cssHandler);
 	router.get("/css/*", serveStaticFiles("./"));
 	router.get("/js/*", serveStaticFiles("./"));
 	router.get("/images/*", serveStaticFiles("./"));
 	router.get("/prettify/*", serveStaticFiles("./"));
+
+	registerPhobos(router);
 	
 	listenHTTP(settings, router);
 }
@@ -73,41 +75,23 @@ void initializeWebsite(ref shared(string[string]) cache, URLRouter router) {
 	logInfo("[INIT] Static website initialized");
 }
 
-void initializeDruntime(ref shared(string[string]) cache, URLRouter router) {
-	import ddox.ddox;
-	import ddox.parsers.dparse;
+void registerPhobos(URLRouter router) {
+	enum SupportedVersions = ["2.065.0", "2.066.1", /* "2.067.0" */];
 
-	string[] webfiledirs;
-	auto docsettings = new DdoxSettings;
-	auto gensettings = new GeneratorSettings;
-
-	//auto pack = parseDString();
-	foreach (file; DruntimeFiles[0..1]) {
-		auto curr = DruntimeFilePattern.format("v2.066.1", file);
-		logInfo("Requesting '%s'...", curr);
-		string content;
-		requestHTTP(curr,
-			    (scope req) { req.method = HTTPMethod.GET; },
-			    (scope res) { content = res.bodyReader.readAllUTF8();}
-			    );
-		//cache[manglePhobosURL(file)] = parseSource(content);
+	foreach (idx, version_; SupportedVersions) {
+		auto settings = new HTTPFileServerSettings;
+		auto from = "/"~version_~"/phobos/*";
+		auto to = "./public/"~version_~"/phobos/";
+		settings.serverPathPrefix = from;
+		router.get(from, serveStaticFiles(to, settings));
+		logInfo("[FILE] Registered %s => %s", from, to);
+		if (idx == (SupportedVersions.length - 1)) {
+			router.get("/phobos/*", staticRedirect(from[0..$-1]));
+			logInfo("[REDIR] Registered /phobos/ => %s", from[0..$-1]);
+		}
 	}
-
-	processDocs(pack, docsettings);
-
-	// register the api routes and start the server
-	auto router = new URLRouter;
-	registerApiDocs(router, pack, gensettings);
-
-	foreach (dir; webfiledirs)
-		router.get("*", serveStaticFiles(dir));
-
-	writefln("Listening on port 8080...");
-	auto settings = new HTTPServerSettings;
-	settings.port = 8080;
-	listenHTTP(settings, router);
-
-	return runEventLoop();
+	//router.get("/phobos/", staticRedirect(LatestLink));
+	//logInfo("Registered /phobos/ => %s", to);
 }
 
 void cssHandler(HTTPServerRequest req, HTTPServerResponse res) {
