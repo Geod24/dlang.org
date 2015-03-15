@@ -39,6 +39,7 @@ dpl-docs/dpl-docs
 __test__library__
 dlang.org
 dub.selections.json
+!public/phobos/*.html
 
 /d.tag
 /.generated
