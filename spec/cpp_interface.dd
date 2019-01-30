@@ -17,6 +17,9 @@ $(H2 $(LNAME2 general_idea, The General Idea))
     Anecdotal evidence suggests that writing such is a minimum
     of a 10 man-year project, essentially making a D compiler
     with such capability unimplementable.
+    Moreover, a full support for all of C++ features would compromise
+    D's integrity as a language, for example if support for logical
+    `const` was introduced.
     Other languages looking to hook up to C++ face the same
     problem, and the solutions have been:
     )
@@ -40,7 +43,17 @@ $(H2 $(LNAME2 general_idea, The General Idea))
     $(LI matching C++ name mangling conventions)
     $(LI matching C++ function calling conventions)
     $(LI matching C++ virtual function table layout for single inheritance)
+    $(LI matching C++ exception handling mechanisms)
+    $(LI taking a pragmatic approach to what can or cannot be done)
     )
+
+$(H2 $(LNAME2 use-case, D <-> C++ interoperability use cases))
+
+    $(P There are 2 main situations when one wants to interface D and C++.
+    Either one wants to call C++ code from D, or one wants to expose D code to C++.
+    Given the host of good C++ library existing, the former is assumed to be more likely.
+    However, real-world usage usually mixes both: for example,
+    a D code might call a C++ library which itself requires a callback to be provided)
 
 $(H2 $(LNAME2 global-functions, Global Functions))
 
